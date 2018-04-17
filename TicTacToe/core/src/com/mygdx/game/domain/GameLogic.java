@@ -208,7 +208,7 @@ public class GameLogic {
         return false;
     }
 
-    int moveCount;
+    private int moveCount;
 
     //Place move and check for end conditions
 
@@ -276,5 +276,9 @@ public class GameLogic {
             hasWinner = false;
             winner = 'D';
         }
+    }
+
+    public int getMoveCount(){
+        return moveCount;
     }
 }

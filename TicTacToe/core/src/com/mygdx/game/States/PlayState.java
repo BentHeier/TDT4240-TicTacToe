@@ -17,6 +17,7 @@ import com.mygdx.game.powerups.ExpandBoardPowerup;
 import com.mygdx.game.domain.GameLogic;
 import com.mygdx.game.powerups.ObstaclePowerup;
 import com.mygdx.game.powerups.SwapPowerup;
+import com.mygdx.game.powerups.TemporaryTilePowerup;
 import com.mygdx.game.sprites.Mark;
 import com.mygdx.game.powerups.Powerup;
 import com.mygdx.game.sprites.Tile;
@@ -49,6 +50,7 @@ public class PlayState implements State {
         ArrayList<Powerup> powerups = new ArrayList<Powerup>();
         powerups.add(new ExpandBoardPowerup());
         powerups.add(new ObstaclePowerup());
+        powerups.add(new TemporaryTilePowerup());
         players.add(new Player(0, powerups));
         players.add(new Player(1, powerups));
     }
@@ -145,6 +147,7 @@ public class PlayState implements State {
             } else if (ts.getState() == 0) {
                 gameLogic.Move(tile.getX(), tile.getY(), 'X');
             }
+
             Sprite s = new Sprite(m.getTexture());
             s.setPosition(tile.getPosition().x, tile.getPosition().y);
             s.setSize(tile.getWidth(), tile.getHeight());

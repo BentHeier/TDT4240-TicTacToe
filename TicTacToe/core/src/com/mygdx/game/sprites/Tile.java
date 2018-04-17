@@ -10,6 +10,7 @@ import com.mygdx.game.domain.InputHandler;
 import com.mygdx.game.domain.TileState;
 import com.mygdx.game.powerups.ExpandBoardPowerup;
 import com.mygdx.game.powerups.ObstaclePowerup;
+import com.mygdx.game.powerups.TemporaryTilePowerup;
 
 
 /**
@@ -36,7 +37,6 @@ import com.mygdx.game.powerups.ObstaclePowerup;
             this.isMarked = false;
             this.x = x;
             this.y = y;
-            //System.out.println("Width: "+width+" , Height: "+height);
         }
 
         public int getX() {
@@ -54,6 +54,14 @@ import com.mygdx.game.powerups.ObstaclePowerup;
             } else{
                 placeMark();
             }
+        }
+
+        public void setTemporaryTile(){
+            isTemporaryTile = true;
+        }
+
+        public boolean isTemporaryTile(){
+            return isTemporaryTile;
         }
 
         public void handlePowerups(){
@@ -78,6 +86,12 @@ import com.mygdx.game.powerups.ObstaclePowerup;
                 if (touchDown()){
                     System.out.println("HEEEY");
                     ((ObstaclePowerup) pu).setObstacle(this);
+                }
+            }
+            if (pu instanceof TemporaryTilePowerup){
+                if (touchDown()){
+                    ((TemporaryTilePowerup) pu).setTemporaryTile(this);
+                    singleton.setpowerupSelected(null);
                 }
             }
         }
