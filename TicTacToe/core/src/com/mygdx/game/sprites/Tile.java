@@ -26,6 +26,7 @@ import com.mygdx.game.powerups.ObstaclePowerup;
         private boolean isMarked;
         private int x,y;
         Singleton singleton = Singleton.getInstance();
+        private boolean isTemporaryTile;
 
         public Tile(float positionX, float positionY, float width, float height, int x, int y){
             setPosition(new Vector3(positionX, positionY, 0));

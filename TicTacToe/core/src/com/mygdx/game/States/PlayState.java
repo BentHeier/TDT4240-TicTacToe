@@ -119,11 +119,14 @@ public class PlayState implements State {
         for (Powerup pu : powerups){
             Sprite s = new Sprite(pu.getTexture());
             s.setSize(50, 50);
+
+            //Originally used code for desktop view
             /*
             s.setPosition((factor / 2) + 25, MyGdxGame.HEIGHT - MyGdxGame.BAR + 10); // Fix this to appear in own menu
             pu.setPosition(new Vector3((factor / 2) + 25, MyGdxGame.HEIGHT - MyGdxGame.BAR + 10 , 0f));
             */
 
+            //Works on phone
             s.setPosition((factor / 2) + 25, Gdx.graphics.getHeight()  - MyGdxGame.BAR + 10); // Fix this to appear in own menu
             pu.setPosition(new Vector3((factor / 2) + 25, Gdx.graphics.getHeight()  - MyGdxGame.BAR + 10 , 0f));
             pu.setHeight(50);
