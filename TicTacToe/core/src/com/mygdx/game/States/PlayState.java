@@ -171,7 +171,11 @@ public class PlayState implements State {
         }
     }
 
+    private int updateMoveCount=0;
+
     public void renderMarks(SpriteBatch sb) {
+        gameLogic.clearBoard();
+        gameLogic.setZeroMovecount();
         for (TileState ts : singleton.getBoardState()) {
             Tile tile = ts.getTile();
             Mark m = new Mark(tile, ts.getState());
@@ -185,6 +189,11 @@ public class PlayState implements State {
             s.setSize(tile.getWidth(), tile.getHeight());
             s.draw(sb);
         }
+        if (gameLogic.getMoveCount()>updateMoveCount){
+            updateMoveCount=gameLogic.getMoveCount();
+            System.out.println(gameLogic.printBoard());
+        }
+
     }
 
     public void spawnRandomPowerup(){

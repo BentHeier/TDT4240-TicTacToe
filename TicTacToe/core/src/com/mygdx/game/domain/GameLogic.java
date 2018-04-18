@@ -34,7 +34,7 @@ public class GameLogic {
             }
         }
         this.board = newBoard;
-        System.out.println(printBoard(this.board));
+        System.out.println(printBoard());
     }
 
 
@@ -62,8 +62,8 @@ public class GameLogic {
         return hasWinner;
     }
 
-    public String printBoard(char[][] board){
-        char[][] matrix = board;
+    public String printBoard(){
+        char[][] matrix = this.board;
         String midBoard = "\n";
         for (int row = 0; row < matrix.length; row++){
             for (int column = 0; column < matrix.length; column++){
@@ -208,74 +208,82 @@ public class GameLogic {
         return false;
     }
 
-    int moveCount;
+
+    private int moveCount;
 
     //Place move and check for end conditions
 
+    public void setZeroMovecount(){
+        moveCount = 0;
+    }
+
     public void Move(int x, int y, char c){
+        int recentMovecount = this.moveCount;
         if(board[board.length-1-x][y] == '-'){
             board[board.length-1-x][y] = c;
             moveCount++;
-            System.out.println("Satt koordinat: "+y+", "+(board.length-1-x));
-            System.out.println(printBoard(this.board));
-        }
-        //check end conditions
-        //check col
-        for (int i = 0; i < n; i++){
-            if(board[i][x] != c)
-                break;
-            if(i == n-1){
-                hasWinner = true;
-                winner = c;
-                System.out.println("Winning by col");
-            }
-        }
-        //check row
-        for(int i = 0; i < n; i++){
-            if(board[y][i] != c)
-                break;
-            if(i == n-1){
-                hasWinner = true;
-                winner = c;
-                System.out.println("Winning by row");
-            }
         }
 
-        //Checking diagonals
-
-        //anti diag
-
-        if(x + y == n - 1){
-            for(int i = 0; i < n; i++){
-                if(board[i][i] != c)
+        if (recentMovecount < moveCount){
+            //check end conditions
+            //check col
+            for (int i = 0; i < n; i++){
+                if(board[i][x] != c)
                     break;
                 if(i == n-1){
                     hasWinner = true;
                     winner = c;
-                    System.out.println("Winning by anti diag");
+                    System.out.println("Winning by col");
                 }
             }
-        }
-
-
-        //diag
-        if(x == y){
+            //check row
             for(int i = 0; i < n; i++){
-                if(board[i][(n-1)-i] != c)
+                if(board[y][i] != c)
                     break;
                 if(i == n-1){
                     hasWinner = true;
                     winner = c;
-                    System.out.println("Winning by diag");
+                    System.out.println("Winning by row");
                 }
+            }
+
+            //Checking diagonals
+
+            //anti diag
+
+            if(x + y == n - 1){
+                for(int i = 0; i < n; i++){
+                    if(board[i][i] != c)
+                        break;
+                    if(i == n-1){
+                        hasWinner = true;
+                        winner = c;
+                        System.out.println("Winning by anti diag");
+                    }
+                }
+            }
+
+
+            //diag
+            if(x == y){
+                for(int i = 0; i < n; i++){
+                    if(board[i][(n-1)-i] != c)
+                        break;
+                    if(i == n-1){
+                        hasWinner = true;
+                        winner = c;
+                        System.out.println("Winning by diag");
+                    }
+                }
+            }
+
+            //check draw
+            else if(moveCount == (Math.pow(n, 2))){
+                hasWinner = false;
+                winner = 'D';
             }
         }
 
-        //check draw
-        else if(moveCount == (Math.pow(n, 2))){
-            hasWinner = false;
-            winner = 'D';
-        }
     }
 
     public int getMoveCount() {
